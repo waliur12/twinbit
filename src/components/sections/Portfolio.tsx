@@ -1,15 +1,29 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useState } from "react";
-import { ArrowUpRight, X } from "lucide-react";
+import { motion } from "framer-motion";
+import { useState } from "react";
+import { ArrowUpRight, Star } from "lucide-react";
 import PhoneMockup from "@/components/PhoneMockup";
 import GradientBlob from "@/components/GradientBlob";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
+import appPulse from "@/assets/app-pulse.jpg";
+import appLumen from "@/assets/app-lumen.jpg";
+import appDrift from "@/assets/app-drift.jpg";
+import appRhythm from "@/assets/app-rhythm.jpg";
+import appAtlas from "@/assets/app-atlas.jpg";
 
 type Project = {
   name: string;
   category: string;
   description: string;
-  gradient: string;
+  accent: string;
+  image: string;
+  metric: string;
+  year: string;
   problem: string;
   approach: string;
   result: string;
@@ -20,7 +34,10 @@ const projects: Project[] = [
     name: "Pulse Fitness",
     category: "Health & Fitness",
     description: "AI-guided workouts with real-time motion tracking via the Neural Engine.",
-    gradient: "from-primary via-accent to-primary-glow",
+    accent: "from-primary/30 via-primary-glow/20 to-transparent",
+    image: appPulse,
+    metric: "220k MAU",
+    year: "2024",
     problem: "Users dropped off home workouts due to poor form feedback.",
     approach: "Built on-device pose estimation using Vision + Core ML, with haptic cues.",
     result: "4.9 App Store rating · 220k MAU within 6 months.",
@@ -29,7 +46,10 @@ const projects: Project[] = [
     name: "Lumen Notes",
     category: "Productivity",
     description: "A markdown-first journal with iCloud sync and beautiful typography.",
-    gradient: "from-accent via-primary to-accent-glow",
+    accent: "from-accent/30 via-accent-glow/20 to-transparent",
+    image: appLumen,
+    metric: "Editor's Choice",
+    year: "2024",
     problem: "Existing note apps felt cluttered and slow on launch.",
     approach: "SwiftUI architecture with CRDT sync engine — sub-100ms cold starts.",
     result: "Editor's Choice · featured by Apple in Productivity.",
@@ -38,7 +58,10 @@ const projects: Project[] = [
     name: "Drift",
     category: "Travel",
     description: "Spontaneous trip planner with offline maps and curated stays.",
-    gradient: "from-primary-glow via-accent-glow to-primary",
+    accent: "from-primary-glow/30 via-accent/20 to-transparent",
+    image: appDrift,
+    metric: "$1.2M booked",
+    year: "2023",
     problem: "Travelers needed an inspiration-first booking flow, not a search box.",
     approach: "Generative itineraries powered by an in-house LLM behind a Swift backend.",
     result: "$1.2M in bookings during a 90-day pilot.",
@@ -47,7 +70,10 @@ const projects: Project[] = [
     name: "Rhythm",
     category: "Music",
     description: "Collaborative playlist studio with live listening rooms and reactions.",
-    gradient: "from-accent-glow via-primary to-accent",
+    accent: "from-accent/30 via-primary/20 to-transparent",
+    image: appRhythm,
+    metric: "60k week-1",
+    year: "2023",
     problem: "Music sharing felt asynchronous and impersonal.",
     approach: "Real-time low-latency audio sync via WebRTC + MusicKit integration.",
     result: "60k installs week one · trending #3 in Music.",
@@ -56,7 +82,10 @@ const projects: Project[] = [
     name: "Atlas",
     category: "Finance",
     description: "A privacy-first net-worth tracker that never leaves your device.",
-    gradient: "from-primary via-primary-glow to-accent",
+    accent: "from-primary/30 via-primary-glow/20 to-transparent",
+    image: appAtlas,
+    metric: "4.8 ★",
+    year: "2024",
     problem: "Users distrusted finance apps that required cloud accounts.",
     approach: "All data stored in the Secure Enclave; sync via end-to-end encrypted iCloud.",
     result: "Featured in Privacy collections · 4.8 stars.",
@@ -64,69 +93,115 @@ const projects: Project[] = [
 ];
 
 const Portfolio = () => {
-  const targetRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: targetRef });
-  const x = useTransform(scrollYProgress, [0, 1], ["1%", "-78%"]);
-
   const [active, setActive] = useState<Project | null>(null);
 
   return (
-    <section id="portfolio" ref={targetRef} className="relative h-[400vh] bg-background">
-      <div className="sticky top-0 flex h-screen items-center overflow-hidden">
-        <GradientBlob className="left-[40%] top-[20%] h-[400px] w-[400px] opacity-20" variant="accent" />
+    <section id="portfolio" className="relative overflow-hidden bg-background py-32">
+      <GradientBlob className="left-[-10%] top-[10%] h-[500px] w-[500px] opacity-30" />
+      <GradientBlob
+        variant="accent"
+        className="right-[-10%] bottom-[10%] h-[500px] w-[500px] opacity-30"
+      />
 
-        <div className="container relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end"
-          >
-            <div>
-              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
-                Selected work
-              </span>
-              <h2 className="mt-3 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-                Apps we're <span className="text-gradient">proud to ship</span>
-              </h2>
-            </div>
-            <p className="max-w-md text-sm text-muted-foreground">
-              Scroll horizontally to explore. Click any project for the full case study.
-            </p>
-          </motion.div>
-        </div>
-
-        <motion.div style={{ x }} className="absolute left-0 top-1/2 flex -translate-y-1/4 gap-8 px-[6vw] pt-32 will-change-transform">
-          {projects.map((p) => (
-            <button
-              key={p.name}
-              onClick={() => setActive(p)}
-              className="group flex w-[320px] shrink-0 cursor-pointer flex-col items-center text-left focus:outline-none"
-            >
-              <PhoneMockup className="transition-transform duration-500 ease-smooth group-hover:-translate-y-2 group-hover:scale-[1.03]">
-                <div className={`absolute inset-0 bg-gradient-to-br ${p.gradient} opacity-90`} />
-                <div className="absolute inset-0 flex flex-col justify-end p-5 transition-transform duration-500 group-hover:-translate-y-2">
-                  <div className="mb-3 inline-flex w-fit rounded-full bg-black/30 px-3 py-1 text-[10px] font-medium text-white backdrop-blur">
-                    {p.category}
-                  </div>
-                  <div className="text-lg font-bold text-white">{p.name}</div>
-                </div>
-                {/* Status bar */}
-                <div className="absolute left-0 right-0 top-0 z-10 flex items-center justify-between px-6 pt-4 text-[10px] font-semibold text-white/90">
-                  <span>9:41</span>
-                  <span />
-                </div>
-              </PhoneMockup>
-              <div className="mt-6 flex w-full items-start justify-between gap-3">
-                <div>
-                  <div className="text-base font-semibold">{p.name}</div>
-                  <p className="mt-1 max-w-[240px] text-xs text-muted-foreground">{p.description}</p>
-                </div>
-                <ArrowUpRight className="mt-1 h-4 w-4 shrink-0 text-muted-foreground transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary" />
-              </div>
-            </button>
-          ))}
+      <div className="container relative z-10">
+        {/* Section header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          className="mx-auto mb-24 max-w-3xl text-center"
+        >
+          <span className="text-xs font-semibold uppercase tracking-[0.25em] text-primary">
+            Selected work
+          </span>
+          <h2 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
+            Apps we're <span className="text-gradient">proud to ship</span>
+          </h2>
+          <p className="mx-auto mt-6 max-w-xl text-base text-muted-foreground">
+            Each project below is a partnership — design, engineering, and launch
+            handled end-to-end. Tap any case to dive in.
+          </p>
         </motion.div>
+
+        {/* Project list — alternating split rows */}
+        <div className="space-y-32 md:space-y-40">
+          {projects.map((p, i) => {
+            const reversed = i % 2 === 1;
+            return (
+              <motion.div
+                key={p.name}
+                initial={{ opacity: 0, y: 60 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                className={`grid grid-cols-1 items-center gap-12 md:grid-cols-12 md:gap-16 ${
+                  reversed ? "md:[&>*:first-child]:order-2" : ""
+                }`}
+              >
+                {/* Phone mockup column */}
+                <div className="relative md:col-span-5">
+                  <div
+                    className={`absolute inset-0 -z-10 bg-gradient-radial ${p.accent} blur-3xl`}
+                    aria-hidden
+                  />
+                  <motion.div
+                    whileHover={{ y: -8, rotate: reversed ? -2 : 2 }}
+                    transition={{ type: "spring", stiffness: 200, damping: 18 }}
+                    className="mx-auto"
+                  >
+                    <PhoneMockup
+                      className="w-[240px] sm:w-[280px]"
+                      showNotch={false}
+                    >
+                      <img
+                        src={p.image}
+                        alt={`${p.name} — ${p.category} app screen`}
+                        loading="lazy"
+                        className="absolute inset-0 h-full w-full object-cover"
+                      />
+                    </PhoneMockup>
+                  </motion.div>
+                </div>
+
+                {/* Content column */}
+                <div className="md:col-span-7">
+                  <div className="flex items-center gap-3 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
+                    <span className="text-primary">0{i + 1}</span>
+                    <span className="h-px w-8 bg-border" />
+                    <span>{p.category}</span>
+                    <span className="h-px w-8 bg-border" />
+                    <span>{p.year}</span>
+                  </div>
+
+                  <h3 className="mt-5 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+                    {p.name}
+                  </h3>
+
+                  <p className="mt-5 max-w-lg text-base text-muted-foreground sm:text-lg">
+                    {p.description}
+                  </p>
+
+                  <div className="mt-8 flex flex-wrap items-center gap-6">
+                    <div className="flex items-center gap-2 rounded-full border border-border/60 bg-secondary/40 px-4 py-2 text-sm backdrop-blur">
+                      <Star className="h-3.5 w-3.5 fill-primary text-primary" />
+                      <span className="font-medium">{p.metric}</span>
+                    </div>
+                    <button
+                      onClick={() => setActive(p)}
+                      className="group inline-flex items-center gap-2 text-sm font-medium text-foreground transition-colors hover:text-primary"
+                    >
+                      <span className="relative">
+                        Read case study
+                        <span className="absolute -bottom-0.5 left-0 h-px w-full origin-left scale-x-0 bg-primary transition-transform duration-300 group-hover:scale-x-100" />
+                      </span>
+                      <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
 
       <Dialog open={!!active} onOpenChange={(o) => !o && setActive(null)}>
@@ -145,7 +220,14 @@ const Portfolio = () => {
                 </DialogDescription>
               </DialogHeader>
 
-              <div className={`my-4 h-32 rounded-xl bg-gradient-to-br ${active.gradient}`} />
+              <div className="my-4 overflow-hidden rounded-xl border border-glass-border/10">
+                <img
+                  src={active.image}
+                  alt={`${active.name} app preview`}
+                  loading="lazy"
+                  className="h-48 w-full object-cover"
+                />
+              </div>
 
               <div className="space-y-4 text-sm">
                 <div>
