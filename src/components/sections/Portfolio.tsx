@@ -141,7 +141,13 @@ const Portfolio = () => {
                 {/* Phone mockup column */}
                 <div className="relative md:col-span-5">
                   <div
-                    className={`absolute inset-0 -z-10 bg-gradient-radial ${p.accent} blur-3xl`}
+                    className="absolute inset-0 -z-10 opacity-60 blur-3xl"
+                    style={{
+                      background:
+                        i % 2 === 0
+                          ? "radial-gradient(circle at 50% 50%, hsl(var(--primary) / 0.35), transparent 65%)"
+                          : "radial-gradient(circle at 50% 50%, hsl(var(--accent) / 0.35), transparent 65%)",
+                    }}
                     aria-hidden
                   />
                   <motion.div
