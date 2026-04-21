@@ -2,8 +2,57 @@ import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { useEffect } from "react";
 import GradientBlob from "@/components/GradientBlob";
+import PhoneMockup from "@/components/PhoneMockup";
+import appPulse from "@/assets/app-pulse.jpg";
+import appLumen from "@/assets/app-lumen.jpg";
+import appDrift from "@/assets/app-drift.jpg";
+import appRhythm from "@/assets/app-rhythm.jpg";
+import appAtlas from "@/assets/app-atlas.jpg";
 
 const headline = ["We", "Build", "High-Performance", "iOS", "Apps"];
+
+const floatingPhones = [
+  {
+    src: appPulse,
+    alt: "Pulse Fitness app screen",
+    className: "left-[4%] top-[18%] w-[160px] sm:w-[190px]",
+    rotate: -14,
+    depth: 1.4,
+    delay: 0,
+  },
+  {
+    src: appAtlas,
+    alt: "Atlas finance app screen",
+    className: "right-[4%] top-[14%] w-[170px] sm:w-[200px]",
+    rotate: 12,
+    depth: -1.6,
+    delay: 0.4,
+  },
+  {
+    src: appLumen,
+    alt: "Lumen Notes app screen",
+    className: "left-[10%] bottom-[8%] w-[140px] sm:w-[170px]",
+    rotate: 8,
+    depth: -1.1,
+    delay: 0.8,
+  },
+  {
+    src: appDrift,
+    alt: "Drift travel app screen",
+    className: "right-[8%] bottom-[6%] w-[150px] sm:w-[180px]",
+    rotate: -10,
+    depth: 1.2,
+    delay: 1.1,
+  },
+  {
+    src: appRhythm,
+    alt: "Rhythm music app screen",
+    className: "left-1/2 top-[6%] -translate-x-1/2 w-[130px] sm:w-[155px]",
+    rotate: -3,
+    depth: 0.8,
+    delay: 0.6,
+  },
+];
 
 const Hero = () => {
   const mx = useMotionValue(0);
