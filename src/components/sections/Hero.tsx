@@ -99,6 +99,53 @@ const Hero = () => {
         aria-hidden
       />
 
+      {/* Floating animated iPhone mockups */}
+      <div className="pointer-events-none absolute inset-0 z-0 hidden md:block" aria-hidden>
+        {floatingPhones.map((p, i) => {
+          const px = useTransform(sx, (v) => v * 22 * p.depth);
+          const py = useTransform(sy, (v) => v * 22 * p.depth);
+          return (
+            <motion.div
+              key={i}
+              style={{ x: px, y: py, rotate: p.rotate }}
+              className={`absolute ${p.className}`}
+              initial={{ opacity: 0, y: 40, scale: 0.85 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{
+                duration: 1.2,
+                delay: 0.3 + p.delay,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+            >
+              <motion.div
+                animate={{ y: [0, -14, 0] }}
+                transition={{
+                  duration: 6 + i,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: i * 0.3,
+                }}
+                className="opacity-70 mix-blend-luminosity hover:opacity-100"
+              >
+                <PhoneMockup
+                  className="w-full shadow-glow"
+                  showNotch={false}
+                >
+                  <img
+                    src={p.src}
+                    alt={p.alt}
+                    className="absolute inset-0 h-full w-full object-cover"
+                    loading="eager"
+                  />
+                </PhoneMockup>
+              </motion.div>
+            </motion.div>
+          );
+        })}
+        {/* Vignette to keep text readable */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/10 to-background/70" />
+      </div>
+
       {/* Subtle grid overlay */}
       <div
         aria-hidden
