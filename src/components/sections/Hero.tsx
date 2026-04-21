@@ -1,4 +1,4 @@
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform, type MotionValue } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { useEffect } from "react";
 import GradientBlob from "@/components/GradientBlob";
@@ -54,6 +54,56 @@ const floatingPhones = [
   },
 ];
 
+type FloatingPhone = (typeof floatingPhones)[number];
+
+const FloatingPhone = ({
+  phone,
+  index,
+  sx,
+  sy,
+}: {
+  phone: FloatingPhone;
+  index: number;
+  sx: MotionValue<number>;
+  sy: MotionValue<number>;
+}) => {
+  const px = useTransform(sx, (v) => v * 22 * phone.depth);
+  const py = useTransform(sy, (v) => v * 22 * phone.depth);
+
+  return (
+    <motion.div
+      style={{ x: px, y: py, rotate: phone.rotate }}
+      className={`absolute ${phone.className}`}
+      initial={{ opacity: 0, y: 40, scale: 0.85 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{
+        duration: 1.2,
+        delay: 0.3 + phone.delay,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+    >
+      <motion.div
+        animate={{ y: [0, -14, 0] }}
+        transition={{
+          duration: 6 + index,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: index * 0.3,
+        }}
+      >
+        <PhoneMockup className="w-full opacity-80 shadow-glow" showNotch={false}>
+          <img
+            src={phone.src}
+            alt={phone.alt}
+            className="absolute inset-0 h-full w-full object-cover"
+            loading="eager"
+          />
+        </PhoneMockup>
+      </motion.div>
+    </motion.div>
+  );
+};
+
 const Hero = () => {
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
@@ -101,49 +151,11 @@ const Hero = () => {
 
       {/* Floating animated iPhone mockups */}
       <div className="pointer-events-none absolute inset-0 z-0 hidden md:block" aria-hidden>
-        {floatingPhones.map((p, i) => {
-          const px = useTransform(sx, (v) => v * 22 * p.depth);
-          const py = useTransform(sy, (v) => v * 22 * p.depth);
-          return (
-            <motion.div
-              key={i}
-              style={{ x: px, y: py, rotate: p.rotate }}
-              className={`absolute ${p.className}`}
-              initial={{ opacity: 0, y: 40, scale: 0.85 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{
-                duration: 1.2,
-                delay: 0.3 + p.delay,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-            >
-              <motion.div
-                animate={{ y: [0, -14, 0] }}
-                transition={{
-                  duration: 6 + i,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: i * 0.3,
-                }}
-                className="opacity-70 mix-blend-luminosity hover:opacity-100"
-              >
-                <PhoneMockup
-                  className="w-full shadow-glow"
-                  showNotch={false}
-                >
-                  <img
-                    src={p.src}
-                    alt={p.alt}
-                    className="absolute inset-0 h-full w-full object-cover"
-                    loading="eager"
-                  />
-                </PhoneMockup>
-              </motion.div>
-            </motion.div>
-          );
-        })}
+        {floatingPhones.map((p, i) => (
+          <FloatingPhone key={i} phone={p} index={i} sx={sx} sy={sy} />
+        ))}
         {/* Vignette to keep text readable */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/10 to-background/70" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/30 to-background/80" />
       </div>
 
       {/* Subtle grid overlay */}
