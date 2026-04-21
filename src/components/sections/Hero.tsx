@@ -1,9 +1,108 @@
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform, type MotionValue } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { useEffect } from "react";
 import GradientBlob from "@/components/GradientBlob";
+import PhoneMockup from "@/components/PhoneMockup";
+import appPulse from "@/assets/app-pulse.jpg";
+import appLumen from "@/assets/app-lumen.jpg";
+import appDrift from "@/assets/app-drift.jpg";
+import appRhythm from "@/assets/app-rhythm.jpg";
+import appAtlas from "@/assets/app-atlas.jpg";
 
 const headline = ["We", "Build", "High-Performance", "iOS", "Apps"];
+
+const floatingPhones = [
+  {
+    src: appPulse,
+    alt: "Pulse Fitness app screen",
+    className: "left-[4%] top-[18%] w-[160px] sm:w-[190px]",
+    rotate: -14,
+    depth: 1.4,
+    delay: 0,
+  },
+  {
+    src: appAtlas,
+    alt: "Atlas finance app screen",
+    className: "right-[4%] top-[14%] w-[170px] sm:w-[200px]",
+    rotate: 12,
+    depth: -1.6,
+    delay: 0.4,
+  },
+  {
+    src: appLumen,
+    alt: "Lumen Notes app screen",
+    className: "left-[10%] bottom-[8%] w-[140px] sm:w-[170px]",
+    rotate: 8,
+    depth: -1.1,
+    delay: 0.8,
+  },
+  {
+    src: appDrift,
+    alt: "Drift travel app screen",
+    className: "right-[8%] bottom-[6%] w-[150px] sm:w-[180px]",
+    rotate: -10,
+    depth: 1.2,
+    delay: 1.1,
+  },
+  {
+    src: appRhythm,
+    alt: "Rhythm music app screen",
+    className: "left-1/2 top-[6%] -translate-x-1/2 w-[130px] sm:w-[155px]",
+    rotate: -3,
+    depth: 0.8,
+    delay: 0.6,
+  },
+];
+
+type FloatingPhone = (typeof floatingPhones)[number];
+
+const FloatingPhone = ({
+  phone,
+  index,
+  sx,
+  sy,
+}: {
+  phone: FloatingPhone;
+  index: number;
+  sx: MotionValue<number>;
+  sy: MotionValue<number>;
+}) => {
+  const px = useTransform(sx, (v) => v * 22 * phone.depth);
+  const py = useTransform(sy, (v) => v * 22 * phone.depth);
+
+  return (
+    <motion.div
+      style={{ x: px, y: py, rotate: phone.rotate }}
+      className={`absolute ${phone.className}`}
+      initial={{ opacity: 0, y: 40, scale: 0.85 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{
+        duration: 1.2,
+        delay: 0.3 + phone.delay,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+    >
+      <motion.div
+        animate={{ y: [0, -14, 0] }}
+        transition={{
+          duration: 6 + index,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: index * 0.3,
+        }}
+      >
+        <PhoneMockup className="w-full opacity-80 shadow-glow" showNotch={false}>
+          <img
+            src={phone.src}
+            alt={phone.alt}
+            className="absolute inset-0 h-full w-full object-cover"
+            loading="eager"
+          />
+        </PhoneMockup>
+      </motion.div>
+    </motion.div>
+  );
+};
 
 const Hero = () => {
   const mx = useMotionValue(0);
@@ -49,6 +148,15 @@ const Hero = () => {
         className="pointer-events-none absolute right-[18%] top-[30%] h-32 w-32 rounded-full bg-accent opacity-40 blur-2xl"
         aria-hidden
       />
+
+      {/* Floating animated iPhone mockups */}
+      <div className="pointer-events-none absolute inset-0 z-0 hidden md:block" aria-hidden>
+        {floatingPhones.map((p, i) => (
+          <FloatingPhone key={i} phone={p} index={i} sx={sx} sy={sy} />
+        ))}
+        {/* Vignette to keep text readable */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/30 to-background/80" />
+      </div>
 
       {/* Subtle grid overlay */}
       <div

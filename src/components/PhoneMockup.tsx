@@ -5,9 +5,10 @@ interface PhoneMockupProps {
   children?: ReactNode;
   className?: string;
   screenClassName?: string;
+  showNotch?: boolean;
 }
 
-const PhoneMockup = ({ children, className, screenClassName }: PhoneMockupProps) => {
+const PhoneMockup = ({ children, className, screenClassName, showNotch = true }: PhoneMockupProps) => {
   return (
     <div
       className={cn(
@@ -29,7 +30,9 @@ const PhoneMockup = ({ children, className, screenClassName }: PhoneMockupProps)
         )}
       >
         {/* Notch / Dynamic Island */}
-        <div className="absolute left-1/2 top-2 z-20 h-6 w-24 -translate-x-1/2 rounded-full bg-black" />
+        {showNotch && (
+          <div className="absolute left-1/2 top-2 z-20 h-6 w-24 -translate-x-1/2 rounded-full bg-black" />
+        )}
         {children}
       </div>
     </div>
