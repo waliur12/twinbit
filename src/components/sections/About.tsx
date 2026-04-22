@@ -2,6 +2,9 @@ import { motion, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import GradientBlob from "@/components/GradientBlob";
 import PhoneMockup from "@/components/PhoneMockup";
+import aboutApp1 from "@/assets/about-app-1.jpg";
+import aboutApp2 from "@/assets/about-app-2.jpg";
+import aboutApp3 from "@/assets/about-app-3.jpg";
 
 const stats = [
   { value: 120, suffix: "+", label: "Apps shipped" },
@@ -62,7 +65,12 @@ const About = () => {
                 style={{ scale: 0.85 }}
               >
                 <PhoneMockup>
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary via-accent to-primary-glow" />
+                  <img
+                    src={aboutApp1}
+                    alt="Pulse fitness app screen"
+                    loading="lazy"
+                    className="absolute inset-0 h-full w-full object-cover"
+                  />
                 </PhoneMockup>
               </motion.div>
               <motion.div
@@ -71,7 +79,12 @@ const About = () => {
                 className="relative z-10"
               >
                 <PhoneMockup>
-                  <div className="absolute inset-0 bg-gradient-to-br from-accent via-primary-glow to-primary" />
+                  <img
+                    src={aboutApp2}
+                    alt="Rhythm music app screen"
+                    loading="lazy"
+                    className="absolute inset-0 h-full w-full object-cover"
+                  />
                 </PhoneMockup>
               </motion.div>
               <motion.div
@@ -81,7 +94,12 @@ const About = () => {
                 style={{ scale: 0.85 }}
               >
                 <PhoneMockup>
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary-glow via-accent-glow to-accent" />
+                  <img
+                    src={aboutApp3}
+                    alt="Drift travel app screen"
+                    loading="lazy"
+                    className="absolute inset-0 h-full w-full object-cover"
+                  />
                 </PhoneMockup>
               </motion.div>
             </div>
