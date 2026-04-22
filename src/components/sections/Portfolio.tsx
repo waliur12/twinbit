@@ -172,12 +172,26 @@ const Portfolio = () => {
                       className="w-[240px] sm:w-[280px]"
                       showNotch={false}
                     >
-                      <img
-                        src={p.image}
-                        alt={`${p.name} — ${p.category} app screen`}
-                        loading="lazy"
-                        className="absolute inset-0 h-full w-full object-cover"
-                      />
+                      {p.video ? (
+                        <video
+                          src={p.video}
+                          poster={p.image}
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          preload="metadata"
+                          aria-label={`${p.name} — ${p.category} app preview`}
+                          className="absolute inset-0 h-full w-full object-cover"
+                        />
+                      ) : (
+                        <img
+                          src={p.image}
+                          alt={`${p.name} — ${p.category} app screen`}
+                          loading="lazy"
+                          className="absolute inset-0 h-full w-full object-cover"
+                        />
+                      )}
                     </PhoneMockup>
                   </motion.div>
                 </SlideIn>
