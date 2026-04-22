@@ -184,7 +184,7 @@ const Hero = () => {
             <span>iOS-first studio · App Store specialists</span>
           </motion.div>
 
-          <h1 className="flex flex-wrap justify-center gap-x-3 gap-y-2 text-4xl font-bold leading-[1.15] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
+          <h1 className="flex flex-wrap justify-center gap-x-3 gap-y-4 text-4xl font-bold leading-[1.25] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
             {headline.map((word, wi) => {
               const isAccent = wi === 2;
               const letters = word.split("");
@@ -195,9 +195,9 @@ const Hero = () => {
               return (
                 <span
                   key={wi}
-                  // whitespace-nowrap keeps each word intact; pb-[0.18em] reserves room
-                  // for descenders (g, p, y) so the wave can lift letters without clipping.
-                  className="inline-flex whitespace-nowrap pb-[0.18em] align-bottom"
+                  // whitespace-nowrap keeps each word intact; py reserves room
+                  // for both the wave's rise and descenders (g, p, y) so nothing clips.
+                  className="inline-flex whitespace-nowrap pb-[0.3em] pt-[0.05em] align-bottom"
                 >
                   {letters.map((char, ci) => (
                       <motion.span
@@ -207,16 +207,16 @@ const Hero = () => {
                         // the headline. Stagger is driven by the cumulative letter index.
                         initial={{ y: "110%", opacity: 0 }}
                         animate={{
-                          // Subtle bottom-to-top wave: each letter rises from below,
-                          // settles, then dips slightly and returns — no upward overshoot
-                          // so letters never escape the line above on wrapped headlines.
-                          y: ["110%", "0%", "8%", "0%"],
-                          opacity: [0, 1, 1, 1],
+                          // Bottom-to-top wave: each letter rises from below and settles.
+                          // No downward dip — keeps descenders (g, d, y) safely inside
+                          // the line on every cycle.
+                          y: ["110%", "0%", "0%"],
+                          opacity: [0, 1, 1],
                         }}
                         transition={{
                           // First cycle reveals the letter, then it loops the wave forever.
-                          duration: 2.6,
-                          times: [0, 0.35, 0.65, 1],
+                          duration: 2.2,
+                          times: [0, 0.5, 1],
                           delay: 0.2 + (letterOffset + ci) * 0.06,
                           ease: [0.22, 1, 0.36, 1],
                           repeat: Infinity,
