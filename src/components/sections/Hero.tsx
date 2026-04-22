@@ -15,7 +15,7 @@ const floatingPhones = [
   {
     src: appPulse,
     alt: "Pulse Fitness app screen",
-    className: "left-[4%] top-[18%] w-[160px] sm:w-[190px]",
+    className: "left-[4%] top-[18%] w-[170px] sm:w-[190px]",
     rotate: -14,
     depth: 1.4,
     delay: 0,
@@ -23,7 +23,7 @@ const floatingPhones = [
   {
     src: appAtlas,
     alt: "Atlas finance app screen",
-    className: "right-[4%] top-[14%] w-[170px] sm:w-[200px]",
+    className: "right-[4%] top-[14%] w-[170px] sm:w-[190px]",
     rotate: 12,
     depth: -1.6,
     delay: 0.4,
@@ -31,7 +31,7 @@ const floatingPhones = [
   {
     src: appLumen,
     alt: "Lumen Notes app screen",
-    className: "left-[10%] bottom-[8%] w-[140px] sm:w-[170px]",
+    className: "left-[10%] bottom-[8%] w-[170px] sm:w-[190px]",
     rotate: 8,
     depth: -1.1,
     delay: 0.8,
@@ -39,7 +39,7 @@ const floatingPhones = [
   {
     src: appDrift,
     alt: "Drift travel app screen",
-    className: "right-[8%] bottom-[6%] w-[150px] sm:w-[180px]",
+    className: "right-[8%] bottom-[6%] w-[170px] sm:w-[190px]",
     rotate: -10,
     depth: 1.2,
     delay: 1.1,
@@ -47,7 +47,7 @@ const floatingPhones = [
   {
     src: appRhythm,
     alt: "Rhythm music app screen",
-    className: "left-1/2 top-[6%] -translate-x-1/2 w-[130px] sm:w-[155px]",
+    className: "left-1/2 top-[6%] -translate-x-1/2 w-[170px] sm:w-[190px]",
     rotate: -3,
     depth: 0.8,
     delay: 0.6,
