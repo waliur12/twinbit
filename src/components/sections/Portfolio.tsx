@@ -137,14 +137,14 @@ const Portfolio = () => {
           className="mx-auto mb-24 max-w-3xl text-center"
         >
           <span className="text-xs font-semibold uppercase tracking-[0.25em] text-primary">
-            Selected work
+            Our Apps
           </span>
           <h2 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-            Apps we're <span className="text-gradient">proud to ship</span>
+            Apps we've <span className="text-gradient">shipped to the world</span>
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-base text-muted-foreground">
-            Each project below is a partnership — design, engineering, and launch
-            handled end-to-end. Tap any case to dive in.
+            Every app below is built, owned, and updated by our team — and downloaded
+            by Apple users in 90+ countries. Tap any title to peek behind the build.
           </p>
         </motion.div>
 
@@ -231,6 +231,14 @@ const Portfolio = () => {
                     <span>{p.year}</span>
                   </div>
 
+                  <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-border/60 bg-secondary/40 px-3 py-1 text-xs text-muted-foreground backdrop-blur">
+                    <Star className="h-3 w-3 fill-primary text-primary" />
+                    <span className="font-medium text-foreground">{p.rating}</span>
+                    <span className="opacity-50">·</span>
+                    <Download className="h-3 w-3" />
+                    <span>{p.downloads} downloads</span>
+                  </div>
+
                   <h3 className="mt-5 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
                     {p.name}
                   </h3>
@@ -239,17 +247,25 @@ const Portfolio = () => {
                     {p.description}
                   </p>
 
-                  <div className="mt-8 flex flex-wrap items-center gap-6">
-                    <div className="flex items-center gap-2 rounded-full border border-border/60 bg-secondary/40 px-4 py-2 text-sm backdrop-blur">
-                      <Star className="h-3.5 w-3.5 fill-primary text-primary" />
-                      <span className="font-medium">{p.metric}</span>
-                    </div>
+                  <div className="mt-8 flex flex-wrap items-center gap-4">
+                    <a
+                      href={p.appStoreUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-3 rounded-2xl bg-foreground px-5 py-3 text-background transition-transform hover:scale-[1.03]"
+                    >
+                      <Apple className="h-6 w-6" />
+                      <span className="flex flex-col items-start leading-none">
+                        <span className="text-[10px] uppercase tracking-wide opacity-80">Download on the</span>
+                        <span className="text-sm font-semibold">App Store</span>
+                      </span>
+                    </a>
                     <button
                       onClick={() => setActive(p)}
                       className="group inline-flex items-center gap-2 text-sm font-medium text-foreground transition-colors hover:text-primary"
                     >
                       <span className="relative">
-                        Read case study
+                        Learn more
                         <span className="absolute -bottom-0.5 left-0 h-px w-full origin-left scale-x-0 bg-primary transition-transform duration-300 group-hover:scale-x-100" />
                       </span>
                       <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
@@ -289,15 +305,15 @@ const Portfolio = () => {
 
               <div className="space-y-4 text-sm">
                 <div>
-                  <div className="text-xs font-semibold uppercase tracking-wider text-primary">Problem</div>
+                  <div className="text-xs font-semibold uppercase tracking-wider text-primary">The story</div>
                   <p className="mt-1 text-muted-foreground">{active.problem}</p>
                 </div>
                 <div>
-                  <div className="text-xs font-semibold uppercase tracking-wider text-primary">Approach</div>
+                  <div className="text-xs font-semibold uppercase tracking-wider text-primary">Behind the build</div>
                   <p className="mt-1 text-muted-foreground">{active.approach}</p>
                 </div>
                 <div>
-                  <div className="text-xs font-semibold uppercase tracking-wider text-primary">Result</div>
+                  <div className="text-xs font-semibold uppercase tracking-wider text-primary">In the wild</div>
                   <p className="mt-1 text-muted-foreground">{active.result}</p>
                 </div>
               </div>
