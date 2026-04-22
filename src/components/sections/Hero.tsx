@@ -67,12 +67,14 @@ const FloatingPhone = ({
   sx: MotionValue<number>;
   sy: MotionValue<number>;
 }) => {
-  const px = useTransform(sx, (v) => v * 22 * phone.depth);
-  const py = useTransform(sy, (v) => v * 22 * phone.depth);
+  // Increased translation range + dynamic rotation tied to mouse for richer parallax.
+  const px = useTransform(sx, (v) => v * 60 * phone.depth);
+  const py = useTransform(sy, (v) => v * 60 * phone.depth);
+  const rotate = useTransform(sx, (v) => phone.rotate + v * 14 * phone.depth);
 
   return (
     <motion.div
-      style={{ x: px, y: py, rotate: phone.rotate }}
+      style={{ x: px, y: py, rotate }}
       className={`absolute ${phone.className}`}
       initial={{ opacity: 0, y: 40, scale: 0.85 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -83,7 +85,7 @@ const FloatingPhone = ({
       }}
     >
       <motion.div
-        animate={{ y: [0, -14, 0] }}
+        animate={{ y: [0, -22, 0] }}
         transition={{
           duration: 6 + index,
           repeat: Infinity,
