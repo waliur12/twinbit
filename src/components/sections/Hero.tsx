@@ -67,12 +67,14 @@ const FloatingPhone = ({
   sx: MotionValue<number>;
   sy: MotionValue<number>;
 }) => {
-  const px = useTransform(sx, (v) => v * 22 * phone.depth);
-  const py = useTransform(sy, (v) => v * 22 * phone.depth);
+  // Increased translation range + dynamic rotation tied to mouse for richer parallax.
+  const px = useTransform(sx, (v) => v * 60 * phone.depth);
+  const py = useTransform(sy, (v) => v * 60 * phone.depth);
+  const rotate = useTransform(sx, (v) => phone.rotate + v * 14 * phone.depth);
 
   return (
     <motion.div
-      style={{ x: px, y: py, rotate: phone.rotate }}
+      style={{ x: px, y: py, rotate }}
       className={`absolute ${phone.className}`}
       initial={{ opacity: 0, y: 40, scale: 0.85 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -83,7 +85,7 @@ const FloatingPhone = ({
       }}
     >
       <motion.div
-        animate={{ y: [0, -14, 0] }}
+        animate={{ y: [0, -22, 0] }}
         transition={{
           duration: 6 + index,
           repeat: Infinity,
@@ -183,22 +185,50 @@ const Hero = () => {
           </motion.div>
 
           <h1 className="text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl lg:text-8xl">
-            {headline.map((word, i) => (
-              <span key={i} className="mr-3 inline-block overflow-hidden align-bottom">
-                <motion.span
-                  initial={{ y: "110%" }}
-                  animate={{ y: 0 }}
-                  transition={{
-                    duration: 0.9,
-                    delay: 0.15 + i * 0.08,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                  className={`inline-block ${i === 2 ? "text-gradient" : ""}`}
+            {headline.map((word, wi) => {
+              const isAccent = wi === 2;
+              const letters = word.split("");
+              // Cumulative letter offset so the wave delay flows across the whole headline.
+              const letterOffset = headline
+                .slice(0, wi)
+                .reduce((acc, w) => acc + w.length, 0);
+              return (
+                <span
+                  key={wi}
+                  className="mr-3 inline-block overflow-hidden align-bottom"
                 >
-                  {word}
-                </motion.span>
-              </span>
-            ))}
+                  <span
+                    className={`group/word inline-flex ${
+                      isAccent ? "text-gradient bg-[length:200%_auto] animate-shimmer" : ""
+                    }`}
+                  >
+                    {letters.map((char, ci) => (
+                      <motion.span
+                        key={ci}
+                        // Initial reveal: each letter rises from below
+                        initial={{ y: "110%", opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{
+                          duration: 0.8,
+                          delay: 0.2 + (letterOffset + ci) * 0.035,
+                          ease: [0.22, 1, 0.36, 1],
+                        }}
+                        // Hover: letter pops up + scales for an interactive wave
+                        whileHover={{
+                          y: -10,
+                          scale: 1.15,
+                          color: isAccent ? undefined : "hsl(var(--primary))",
+                          transition: { type: "spring", stiffness: 350, damping: 12 },
+                        }}
+                        className="inline-block cursor-default will-change-transform"
+                      >
+                        {char}
+                      </motion.span>
+                    ))}
+                  </span>
+                </span>
+              );
+            })}
           </h1>
 
           <motion.p
