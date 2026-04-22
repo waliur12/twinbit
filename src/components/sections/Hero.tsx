@@ -207,7 +207,10 @@ const Hero = () => {
                         // the headline. Stagger is driven by the cumulative letter index.
                         initial={{ y: "110%", opacity: 0 }}
                         animate={{
-                          y: ["110%", "0%", "-18%", "0%"],
+                          // Subtle bottom-to-top wave: each letter rises from below,
+                          // settles, then dips slightly and returns — no upward overshoot
+                          // so letters never escape the line above on wrapped headlines.
+                          y: ["110%", "0%", "8%", "0%"],
                           opacity: [0, 1, 1, 1],
                         }}
                         transition={{
