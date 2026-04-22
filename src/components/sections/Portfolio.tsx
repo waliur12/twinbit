@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { ArrowUpRight, Star } from "lucide-react";
+import { ArrowUpRight, Star, Apple, Download } from "lucide-react";
 import PhoneMockup from "@/components/PhoneMockup";
 import GradientBlob from "@/components/GradientBlob";
 import SlideIn from "@/components/SlideIn";
@@ -28,6 +28,9 @@ type Project = {
   /** Optional looping screen-recording shown inside the iPhone mockup. */
   video?: string;
   metric: string;
+  rating: string;
+  downloads: string;
+  appStoreUrl: string;
   year: string;
   problem: string;
   approach: string;
@@ -43,6 +46,9 @@ const projects: Project[] = [
     image: appPulse,
     video: appPulseVideo.url,
     metric: "220k MAU",
+    rating: "4.9",
+    downloads: "220k+",
+    appStoreUrl: "#",
     year: "2024",
     problem: "Users dropped off home workouts due to poor form feedback.",
     approach: "Built on-device pose estimation using Vision + Core ML, with haptic cues.",
@@ -55,6 +61,9 @@ const projects: Project[] = [
     accent: "from-accent/30 via-accent-glow/20 to-transparent",
     image: appLumen,
     metric: "Editor's Choice",
+    rating: "4.8",
+    downloads: "150k+",
+    appStoreUrl: "#",
     year: "2024",
     problem: "Existing note apps felt cluttered and slow on launch.",
     approach: "SwiftUI architecture with CRDT sync engine — sub-100ms cold starts.",
@@ -68,6 +77,9 @@ const projects: Project[] = [
     image: appDrift,
     video: appDriftVideo.url,
     metric: "$1.2M booked",
+    rating: "4.7",
+    downloads: "90k+",
+    appStoreUrl: "#",
     year: "2023",
     problem: "Travelers needed an inspiration-first booking flow, not a search box.",
     approach: "Generative itineraries powered by an in-house LLM behind a Swift backend.",
@@ -80,6 +92,9 @@ const projects: Project[] = [
     accent: "from-accent/30 via-primary/20 to-transparent",
     image: appRhythm,
     metric: "60k week-1",
+    rating: "4.8",
+    downloads: "60k+",
+    appStoreUrl: "#",
     year: "2023",
     problem: "Music sharing felt asynchronous and impersonal.",
     approach: "Real-time low-latency audio sync via WebRTC + MusicKit integration.",
@@ -92,6 +107,9 @@ const projects: Project[] = [
     accent: "from-primary/30 via-primary-glow/20 to-transparent",
     image: appAtlas,
     metric: "4.8 ★",
+    rating: "4.8",
+    downloads: "40k+",
+    appStoreUrl: "#",
     year: "2024",
     problem: "Users distrusted finance apps that required cloud accounts.",
     approach: "All data stored in the Secure Enclave; sync via end-to-end encrypted iCloud.",
