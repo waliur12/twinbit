@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 
 const links = [
   { label: "Services", href: "#services" },
-  { label: "Work", href: "#portfolio" },
+  { label: "Apps", href: "#portfolio" },
   { label: "Process", href: "#process" },
   { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
@@ -60,10 +60,10 @@ const Navbar = () => {
           </ul>
 
           <a
-            href="#contact"
+            href="#portfolio"
             className="hidden rounded-full bg-gradient-primary px-5 py-2 text-sm font-medium text-primary-foreground shadow-glow transition-transform hover:scale-105 md:inline-block"
           >
-            Start a project
+            Get our apps
           </a>
 
           <button
@@ -95,11 +95,11 @@ const Navbar = () => {
               ))}
               <li className="pt-2">
                 <a
-                  href="#contact"
+                  href="#portfolio"
                   onClick={() => setOpen(false)}
                   className="block rounded-full bg-gradient-primary px-5 py-3 text-center text-sm font-medium text-primary-foreground shadow-glow"
                 >
-                  Start a project
+                  Get our apps
                 </a>
               </li>
             </ul>

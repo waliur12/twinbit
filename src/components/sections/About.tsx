@@ -7,9 +7,9 @@ import aboutApp2 from "@/assets/about-app-2.jpg";
 import aboutApp3 from "@/assets/about-app-3.jpg";
 
 const stats = [
-  { value: 120, suffix: "+", label: "Apps shipped" },
-  { value: 18, suffix: "M+", label: "Total downloads" },
-  { value: 9, suffix: "yrs", label: "iOS expertise" },
+  { value: 12, suffix: "+", label: "Apps in the App Store" },
+  { value: 18, suffix: "M+", label: "Worldwide downloads" },
+  { value: 9, suffix: "yrs", label: "Years shipping on iOS" },
 ];
 
 const Counter = ({ value, suffix }: { value: number; suffix: string }) => {
@@ -116,13 +116,12 @@ const About = () => {
               About
             </span>
             <h2 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-              An iOS-only studio, by choice.
+              An indie iOS product studio.
             </h2>
             <p className="mt-6 text-base leading-relaxed text-muted-foreground">
-              We've spent nearly a decade obsessing over a single platform. Every animation curve,
-              every haptic, every Swift line is tuned to feel inevitable on Apple hardware.
-              Founders trust us with their first app; established teams rely on us to keep their
-              flagship sharp release after release.
+              We don't build for clients. We build the apps we wish existed — then share
+              them with Apple users in 90+ countries. Every animation curve, every haptic,
+              every Swift line is tuned to feel inevitable on iPhone.
             </p>
 
             <div className="mt-10 grid grid-cols-3 gap-6 border-t border-border/50 pt-8">

@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useSpring, useTransform, type MotionValue } from "framer-motion";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles, Apple } from "lucide-react";
 import { useEffect } from "react";
 import GradientBlob from "@/components/GradientBlob";
 import PhoneMockup from "@/components/PhoneMockup";
@@ -9,7 +9,7 @@ import appDrift from "@/assets/app-drift.jpg";
 import appRhythm from "@/assets/app-rhythm.jpg";
 import appAtlas from "@/assets/app-atlas.jpg";
 
-const headline = ["We", "Build", "High-Performance", "iOS", "Apps"];
+const headline = ["Apps", "We", "Build.", "Worlds", "You", "Love."];
 
 const floatingPhones = [
   {
@@ -181,12 +181,12 @@ const Hero = () => {
             className="mb-8 inline-flex items-center gap-2 rounded-full border border-border/60 bg-secondary/50 px-4 py-1.5 text-xs text-muted-foreground backdrop-blur"
           >
             <Sparkles className="h-3.5 w-3.5 text-primary" />
-            <span>iOS-first studio · App Store specialists</span>
+            <span>Made for iPhone · Loved worldwide</span>
           </motion.div>
 
           <h1 className="flex flex-wrap justify-center gap-x-3 gap-y-4 text-4xl font-bold leading-[1.25] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
             {headline.map((word, wi) => {
-              const isAccent = wi === 2;
+              const isAccent = wi === 3;
               const letters = word.split("");
               // Cumulative letter offset so the wave delay flows across the whole headline.
               const letterOffset = headline
@@ -240,8 +240,8 @@ const Hero = () => {
             transition={{ duration: 0.7, delay: 0.7 }}
             className="mx-auto mt-8 max-w-2xl text-base text-muted-foreground sm:text-lg"
           >
-            From concept to App Store launch — we design, build, and ship native iOS
-            experiences that feel inevitable. Crafted in Swift, polished to perfection.
+            We're a product studio crafting our own iOS apps — used by millions of
+            Apple fans across 90+ countries. Made in Swift, made to delight.
           </motion.p>
 
           <motion.div
@@ -254,15 +254,19 @@ const Hero = () => {
               href="#portfolio"
               className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-gradient-primary px-7 py-3.5 text-sm font-medium text-primary-foreground shadow-glow transition-transform hover:scale-105"
             >
-              <span>View Our Work</span>
+              <span>Explore Our Apps</span>
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-1000 group-hover:translate-x-full" />
             </a>
             <a
-              href="#contact"
-              className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-secondary/40 px-7 py-3.5 text-sm font-medium text-foreground backdrop-blur transition-colors hover:bg-secondary"
+              href="#portfolio"
+              className="inline-flex items-center gap-3 rounded-full bg-foreground px-6 py-3 text-sm font-medium text-background transition-transform hover:scale-105"
             >
-              Start a project
+              <Apple className="h-6 w-6" />
+              <span className="flex flex-col items-start leading-none">
+                <span className="text-[10px] uppercase tracking-wide opacity-80">Download on the</span>
+                <span className="text-base font-semibold">App Store</span>
+              </span>
             </a>
           </motion.div>
         </div>

@@ -1,28 +1,28 @@
 import { motion } from "framer-motion";
-import { Smartphone, Palette, Rocket, Wrench } from "lucide-react";
+import { Zap, ShieldCheck, Sparkles, RefreshCw } from "lucide-react";
 import GlassCard from "@/components/GlassCard";
 import GradientBlob from "@/components/GradientBlob";
 
 const services = [
   {
-    icon: Smartphone,
-    title: "iOS App Development",
-    desc: "Native Swift & SwiftUI apps engineered for performance, accessibility, and the latest iOS features.",
+    icon: Zap,
+    title: "Native Performance",
+    desc: "Built in Swift & SwiftUI for fluid 120Hz experiences that feel instant on every iPhone.",
   },
   {
-    icon: Palette,
-    title: "UI/UX Design",
-    desc: "Human Interface-aligned product design that turns first-time users into daily fans.",
+    icon: ShieldCheck,
+    title: "Privacy First",
+    desc: "On-device intelligence, zero tracking, and no accounts required. Your data stays yours.",
   },
   {
-    icon: Rocket,
-    title: "App Store Publishing",
-    desc: "Submission, ASO, screenshots, and review handling — we ship it so you don't have to.",
+    icon: Sparkles,
+    title: "Designed for Delight",
+    desc: "Haptics, animations, and HIG-perfect interactions that turn everyday taps into moments.",
   },
   {
-    icon: Wrench,
-    title: "App Maintenance",
-    desc: "Ongoing updates, OS migrations, and performance care so your app keeps shining.",
+    icon: RefreshCw,
+    title: "Always Improving",
+    desc: "Frequent updates shaped by our community — every release sharper than the last.",
   },
 ];
 
@@ -40,13 +40,13 @@ const Services = () => {
           className="mx-auto mb-16 max-w-2xl text-center"
         >
           <span className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
-            Services
+            Our Promise
           </span>
           <h2 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-            Everything you need to <span className="text-gradient">launch on iOS</span>
+            Why people choose <span className="text-gradient">our apps</span>
           </h2>
           <p className="mt-5 text-muted-foreground">
-            One studio, end-to-end. From the first sketch to the App Store badge.
+            Every app we ship follows the same set of principles — the things that make iPhone feel like iPhone.
           </p>
         </motion.div>
 

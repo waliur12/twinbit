@@ -3,10 +3,10 @@ import { useRef } from "react";
 import { Lightbulb, PenTool, Code2, Rocket } from "lucide-react";
 
 const steps = [
-  { icon: Lightbulb, title: "Idea & Planning", desc: "Discovery sprints, scope, and a roadmap aligned to App Store goals." },
-  { icon: PenTool, title: "Design", desc: "Interactive prototypes built on Apple's Human Interface Guidelines." },
-  { icon: Code2, title: "Development", desc: "Native Swift, modular architecture, full CI/CD pipelines." },
-  { icon: Rocket, title: "Launch", desc: "Submission, ASO, marketing assets, and post-launch monitoring." },
+  { icon: Lightbulb, title: "Spark", desc: "An idea our own team can't stop using — that's where every app starts." },
+  { icon: PenTool, title: "Sketch", desc: "We prototype in SwiftUI until the app feels inevitable on iPhone." },
+  { icon: Code2, title: "Ship", desc: "Polished in Swift, tested with our community, released worldwide." },
+  { icon: Rocket, title: "Listen", desc: "We update relentlessly based on real users in the App Store." },
 ];
 
 const Process = () => {
@@ -25,9 +25,9 @@ const Process = () => {
           transition={{ duration: 0.7 }}
           className="mx-auto mb-20 max-w-2xl text-center"
         >
-          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">Process</span>
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">How We Craft</span>
           <h2 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-            From idea to <span className="text-gradient">App Store</span>
+            How we craft <span className="text-gradient">our apps</span>
           </h2>
         </motion.div>
 

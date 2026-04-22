@@ -14,7 +14,7 @@ const Footer = () => {
         </div>
 
         <p className="text-xs text-muted-foreground">
-          © {new Date().getFullYear()} LoftiOS Studio. Crafted in Swift.
+          © {new Date().getFullYear()} LoftiOS — Independent iOS product studio · Crafted in Swift.
         </p>
 
         <div className="flex items-center gap-3">
