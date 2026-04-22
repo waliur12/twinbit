@@ -16,6 +16,8 @@ import appLumen from "@/assets/app-lumen.jpg";
 import appDrift from "@/assets/app-drift.jpg";
 import appRhythm from "@/assets/app-rhythm.jpg";
 import appAtlas from "@/assets/app-atlas.jpg";
+import appPulseVideo from "@/assets/app-pulse-video.mp4.asset.json";
+import appDriftVideo from "@/assets/app-drift-video.mp4.asset.json";
 
 type Project = {
   name: string;
@@ -23,6 +25,8 @@ type Project = {
   description: string;
   accent: string;
   image: string;
+  /** Optional looping screen-recording shown inside the iPhone mockup. */
+  video?: string;
   metric: string;
   year: string;
   problem: string;
@@ -37,6 +41,7 @@ const projects: Project[] = [
     description: "AI-guided workouts with real-time motion tracking via the Neural Engine.",
     accent: "from-primary/30 via-primary-glow/20 to-transparent",
     image: appPulse,
+    video: appPulseVideo.url,
     metric: "220k MAU",
     year: "2024",
     problem: "Users dropped off home workouts due to poor form feedback.",
@@ -61,6 +66,7 @@ const projects: Project[] = [
     description: "Spontaneous trip planner with offline maps and curated stays.",
     accent: "from-primary-glow/30 via-accent/20 to-transparent",
     image: appDrift,
+    video: appDriftVideo.url,
     metric: "$1.2M booked",
     year: "2023",
     problem: "Travelers needed an inspiration-first booking flow, not a search box.",
