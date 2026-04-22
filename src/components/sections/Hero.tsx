@@ -184,7 +184,7 @@ const Hero = () => {
             <span>iOS-first studio · App Store specialists</span>
           </motion.div>
 
-          <h1 className="text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl lg:text-8xl">
+          <h1 className="flex flex-wrap justify-center gap-x-3 gap-y-2 text-4xl font-bold leading-[1.15] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
             {headline.map((word, wi) => {
               const isAccent = wi === 2;
               const letters = word.split("");
@@ -195,12 +195,11 @@ const Hero = () => {
               return (
                 <span
                   key={wi}
-                  className="mr-3 inline-block align-bottom [overflow:clip] [overflow-clip-margin:0.5em]"
+                  // whitespace-nowrap keeps each word intact; pb-[0.18em] reserves room
+                  // for descenders (g, p, y) so the wave can lift letters without clipping.
+                  className="inline-flex whitespace-nowrap pb-[0.18em] align-bottom"
                 >
-                  <span
-                    className="group/word inline-flex"
-                  >
-                    {letters.map((char, ci) => (
+                  {letters.map((char, ci) => (
                       <motion.span
                         key={ci}
                         // Auto wave: each letter continuously rises from bottom to top
@@ -226,8 +225,7 @@ const Hero = () => {
                       >
                         {char}
                       </motion.span>
-                    ))}
-                  </span>
+                  ))}
                 </span>
               );
             })}
