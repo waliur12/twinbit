@@ -51,10 +51,10 @@ const About = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="relative mx-auto flex h-[480px] w-full max-w-md items-center justify-center"
+            className="relative mx-auto flex h-[360px] w-full max-w-md items-center justify-center overflow-hidden sm:h-[480px]"
           >
             <div className="absolute inset-0 rounded-full bg-gradient-glow blur-2xl" />
-            <div className="relative flex items-center justify-center gap-[-40px]">
+            <div className="relative flex scale-75 items-center justify-center sm:scale-100">
               <motion.div
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 6, repeat: Infinity }}
