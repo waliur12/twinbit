@@ -144,6 +144,7 @@ const Portfolio = () => {
                   distance={120}
                   duration={1}
                   ease={[0.22, 1, 0.36, 1]}
+                  once={false}
                   className="relative md:col-span-5"
                 >
                   <div
@@ -181,6 +182,7 @@ const Portfolio = () => {
                   distance={80}
                   duration={0.9}
                   delay={0.15}
+                  once={false}
                   className="md:col-span-7"
                 >
                   <div className="flex items-center gap-3 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
