@@ -3,6 +3,7 @@ import { useState } from "react";
 import { ArrowUpRight, Star } from "lucide-react";
 import PhoneMockup from "@/components/PhoneMockup";
 import GradientBlob from "@/components/GradientBlob";
+import SlideIn from "@/components/SlideIn";
 import {
   Dialog,
   DialogContent,
@@ -127,19 +128,24 @@ const Portfolio = () => {
         <div className="space-y-32 md:space-y-40">
           {projects.map((p, i) => {
             const reversed = i % 2 === 1;
+            // Image slides in from the side it sits on; copy slides from the opposite side.
+            const imageDirection = reversed ? "right" : "left";
+            const contentDirection = reversed ? "left" : "right";
             return (
-              <motion.div
+              <div
                 key={p.name}
-                initial={{ opacity: 0, y: 60 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                 className={`grid grid-cols-1 items-center gap-12 md:grid-cols-12 md:gap-16 ${
                   reversed ? "md:[&>*:first-child]:order-2" : ""
                 }`}
               >
                 {/* Phone mockup column */}
-                <div className="relative md:col-span-5">
+                <SlideIn
+                  direction={imageDirection}
+                  distance={120}
+                  duration={1}
+                  ease={[0.22, 1, 0.36, 1]}
+                  className="relative md:col-span-5"
+                >
                   <div
                     className="absolute inset-0 -z-10 opacity-60 blur-3xl"
                     style={{
@@ -167,10 +173,16 @@ const Portfolio = () => {
                       />
                     </PhoneMockup>
                   </motion.div>
-                </div>
+                </SlideIn>
 
                 {/* Content column */}
-                <div className="md:col-span-7">
+                <SlideIn
+                  direction={contentDirection}
+                  distance={80}
+                  duration={0.9}
+                  delay={0.15}
+                  className="md:col-span-7"
+                >
                   <div className="flex items-center gap-3 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
                     <span className="text-primary">0{i + 1}</span>
                     <span className="h-px w-8 bg-border" />
@@ -203,8 +215,8 @@ const Portfolio = () => {
                       <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                     </button>
                   </div>
-                </div>
-              </motion.div>
+                </SlideIn>
+              </div>
             );
           })}
         </div>
