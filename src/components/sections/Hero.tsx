@@ -195,12 +195,10 @@ const Hero = () => {
               return (
                 <span
                   key={wi}
-                  className="mr-3 inline-block overflow-hidden align-bottom"
+                  className="mr-3 inline-block align-bottom [overflow:clip] [overflow-clip-margin:0.5em]"
                 >
                   <span
-                    className={`group/word inline-flex ${
-                      isAccent ? "text-gradient bg-[length:200%_auto] animate-shimmer" : ""
-                    }`}
+                    className="group/word inline-flex"
                   >
                     {letters.map((char, ci) => (
                       <motion.span
@@ -222,7 +220,9 @@ const Hero = () => {
                           repeat: Infinity,
                           repeatDelay: 1.6,
                         }}
-                        className="inline-block will-change-transform"
+                        className={`inline-block will-change-transform ${
+                          isAccent ? "text-gradient bg-[length:200%_auto] animate-shimmer" : ""
+                        }`}
                       >
                         {char}
                       </motion.span>
